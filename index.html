@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ferias y Fiestas del Grado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Baloo+2:wght@500;700;800&family=Bungee&family=Bungee+Shade&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: cartel de feria de pueblo nocturno — banderines, pólvora, tarima de artistas, muro de memes y bando municipal. Un solo look (noche de feria). */
+:root{
+  --noche:#1a0f3d; --noche-2:#24145a; --papel:#fff6e0; --tinta:#1a0f3d;
+  --fucsia:#ff2e88; --amarillo:#ffd23f; --verde:#12c98a; --cian:#2ec4ff; --naranja:#ff7a1a;
+  --suave:#c9bff0;
+  --f-display:"Bungee","Arial Black",Impact,sans-serif;
+  --f-shade:"Bungee Shade","Bungee","Arial Black",sans-serif;
+  --f-meme:"Anton",Impact,"Arial Narrow Bold",sans-serif;
+  --f-body:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{background:var(--noche)}
+body{background:var(--noche);color:var(--papel);font-family:var(--f-body);font-size:17px;line-height:1.5;overflow-x:hidden}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--amarillo);outline-offset:3px;border-radius:6px}
+
+/* ---------- Banderines ---------- */
+.banderines{position:relative;height:64px;overflow:hidden;z-index:3}
+.banderines::before{content:"";position:absolute;left:-2%;right:-2%;top:10px;height:22px;border-top:2px solid #e9dcb8;border-radius:50%}
+.fila{position:absolute;top:12px;left:0;right:0;display:flex;justify-content:space-around}
+.flag{width:30px;height:40px;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:50% 0;animation:swing 2.6s ease-in-out infinite}
+.flag:nth-child(5n+1){background:var(--fucsia)}.flag:nth-child(5n+2){background:var(--amarillo)}.flag:nth-child(5n+3){background:var(--verde)}.flag:nth-child(5n+4){background:var(--cian)}.flag:nth-child(5n){background:var(--naranja)}
+@keyframes swing{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+
+/* ---------- Hero / cartel ---------- */
+.hero{position:relative;text-align:center;padding-block:8px 48px;isolation:isolate}
+#polvora{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.presentan{font-weight:700;color:var(--suave);font-size:clamp(14px,2.2vw,18px);max-width:40ch;margin:8px auto 10px;text-wrap:balance}
+.grandes{font-family:var(--f-display);color:var(--cian);letter-spacing:.3em;font-size:clamp(18px,3.4vw,28px);margin:0}
+h1{margin:4px 0 0;font-family:var(--f-shade);font-weight:400;line-height:.95;color:var(--amarillo);font-size:clamp(44px,10.5vw,118px);text-shadow:4px 4px 0 var(--fucsia);text-wrap:balance}
+h1 span{display:block}
+.anio{display:inline-block;font-family:var(--f-display);background:var(--fucsia);color:var(--papel);padding:2px 18px;border-radius:999px;font-size:clamp(20px,4vw,34px);margin-top:12px;transform:rotate(-3deg);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{transform:rotate(-3deg) scale(1.08)}}
+.honor{font-size:clamp(17px,2.6vw,22px);margin:18px auto 0;max-width:34ch;text-wrap:balance}
+.honor b{color:var(--amarillo);font-weight:800}
+.sellos{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:28px}
+.sello{background:var(--papel);color:var(--tinta);border:3px dashed var(--tinta);outline:4px solid var(--papel);padding:10px 18px;border-radius:10px;min-width:150px}
+.sello:nth-child(1){transform:rotate(-4deg);outline-color:var(--amarillo);background:var(--amarillo)}
+.sello:nth-child(2){transform:rotate(2deg);outline-color:var(--cian);background:var(--cian)}
+.sello:nth-child(3){transform:rotate(-1.5deg);outline-color:var(--verde);background:var(--verde)}
+.sello small{display:block;font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.sello strong{display:block;font-family:var(--f-display);font-size:clamp(22px,4vw,30px);font-weight:400;line-height:1.1}
+
+/* ---------- Perifoneo ---------- */
+.perifoneo{background:var(--amarillo);color:var(--tinta);border-block:4px solid var(--tinta);overflow:hidden;white-space:nowrap;font-family:var(--f-display);font-size:clamp(15px,2.4vw,20px);padding-block:10px;transform:rotate(-1.2deg);margin-inline:-20px}
+.cinta{display:inline-block;animation:cinta 38s linear infinite}
+.cinta span{padding-inline:28px}
+@keyframes cinta{to{transform:translateX(-50%)}}
+
+/* ---------- Secciones ---------- */
+section{padding-block:56px}
+.eyebrow{font-family:var(--f-mono);font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--cian);font-weight:700;margin:0 0 6px}
+h2{font-family:var(--f-display);font-weight:400;font-size:clamp(28px,5vw,46px);line-height:1.05;margin:0 0 22px;color:var(--papel);text-wrap:balance}
+h2 em{font-style:normal;color:var(--fucsia)}
+
+/* Cartel de artistas */
+.tarima{background:var(--papel);color:var(--tinta);border-radius:6px;padding:28px clamp(16px,4vw,40px);text-align:center;box-shadow:10px 10px 0 var(--fucsia);position:relative}
+.tarima .cabeza{font-family:var(--f-mono);font-size:13px;letter-spacing:.2em;text-transform:uppercase;margin:0}
+.headliner{font-family:var(--f-shade);font-size:clamp(30px,7vw,64px);line-height:1;margin:8px 0 2px;color:var(--fucsia);text-wrap:balance}
+.headliner-sub{font-family:var(--f-display);font-size:clamp(14px,2.4vw,20px);margin:0 0 18px}
+.artistas{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.artistas li{font-family:var(--f-display);line-height:1.15;text-wrap:balance}
+.artistas li:nth-child(1){font-size:clamp(22px,4.4vw,38px);color:var(--verde)}
+.artistas li:nth-child(2){font-size:clamp(19px,3.6vw,30px)}
+.artistas li:nth-child(3){font-size:clamp(17px,3vw,26px);color:#0b8fd0}
+.artistas li:nth-child(4),.artistas li:nth-child(5){font-size:clamp(15px,2.5vw,21px)}
+.artistas li small{display:block;font-family:var(--f-body);font-size:14px;font-weight:700;color:#5a4f86;margin-top:-2px}
+.separa{height:2px;background:repeating-linear-gradient(90deg,var(--tinta) 0 10px,transparent 10px 18px);margin:22px 0 16px}
+.extras{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.extras span{background:var(--tinta);color:var(--papel);padding:6px 14px;border-radius:999px;font-weight:700;font-size:15px}
+.extras span:nth-child(odd){background:var(--naranja);color:var(--tinta)}
+
+/* Transmisión en vivo */
+.vivo{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:center}
+.pantalla{position:relative;background:#0b0820;border:4px solid var(--papel);border-radius:14px;overflow:hidden;aspect-ratio:4/3;max-width:100%;box-shadow:-10px 10px 0 var(--cian)}
+#brazo{width:100%;height:100%;display:block}
+.rec{position:absolute;top:10px;left:12px;font-family:var(--f-mono);font-size:12px;font-weight:700;background:rgba(0,0,0,.55);padding:3px 8px;border-radius:4px;display:flex;align-items:center;gap:6px}
+.rec i{width:9px;height:9px;border-radius:50%;background:#ff3b3b;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.15}}
+.telemetria{position:absolute;bottom:10px;right:12px;font-family:var(--f-mono);font-size:12px;color:var(--verde);background:rgba(0,0,0,.55);padding:4px 8px;border-radius:4px;font-variant-numeric:tabular-nums;text-align:right}
+.vivo p{margin:0 0 12px;max-width:42ch}
+.vivo code{font-family:var(--f-mono);font-size:14px;color:var(--amarillo)}
+
+/* Muro de memes */
+.memes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.meme{background:#000;border-radius:10px;overflow:hidden;position:relative;aspect-ratio:1/1;max-width:100%;filter:saturate(1.35) contrast(1.08)}
+.meme svg{width:100%;height:100%;display:block}
+.meme figcaption{position:absolute;left:0;right:0;bottom:8%;text-align:center;font-family:var(--f-meme);color:#fff;font-size:clamp(22px,3.6vw,36px);line-height:1;padding-inline:8px;text-shadow:2px 2px 0 #000,-2px 2px 0 #000,2px -2px 0 #000,-2px -2px 0 #000,0 3px 8px rgba(0,0,0,.6);text-wrap:balance}
+.meme figcaption.arriba{top:6%;bottom:auto}
+.meme .gif{position:absolute;top:8px;right:8px;font-family:var(--f-mono);font-size:10px;font-weight:700;background:rgba(0,0,0,.6);color:#fff;padding:1px 5px;border-radius:3px}
+.anim-wobble{animation:wobble 1.8s ease-in-out infinite;transform-origin:50% 80%}
+.anim-zoom{animation:zoom 3.2s ease-in-out infinite;transform-origin:50% 45%}
+.anim-shake{animation:shake .35s linear infinite}
+.anim-flota{animation:flota 2.4s ease-in-out infinite}
+@keyframes wobble{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes zoom{0%,55%{transform:scale(1)}70%,100%{transform:scale(1.45)}}
+@keyframes shake{0%{transform:translate(0,0)}25%{transform:translate(2px,-1px)}50%{transform:translate(-2px,1px)}75%{transform:translate(1px,2px)}100%{transform:translate(0,0)}}
+@keyframes flota{50%{transform:translateY(-10px)}}
+.parpadeo{animation:parpadeo 3s infinite;transform-box:fill-box;transform-origin:center}
+@keyframes parpadeo{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+
+/* Escarapela pelacables */
+.escarapela-zona{display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center}
+.escarapela{width:min(340px,100%);margin:0 auto;animation:ladeo 4s ease-in-out infinite}
+@keyframes ladeo{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+.escarapela svg{width:100%;height:auto;display:block;filter:drop-shadow(0 14px 18px rgba(0,0,0,.45))}
+
+/* Detalles */
+.detalles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.dato{background:var(--noche-2);border:2px solid #3b2a80;border-radius:12px;padding:18px}
+.dato h3{margin:0 0 4px;font-family:var(--f-mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--cian)}
+.dato p{margin:0;font-size:20px;font-weight:800;line-height:1.25}
+.dato p span{display:block;font-size:15px;font-weight:500;color:var(--suave)}
+/* Último suspiro */
+.suspiro{text-align:center}
+.cronica{max-width:52ch;margin:0 auto 14px;font-size:clamp(17px,2.4vw,20px);color:var(--suave);font-style:italic;text-wrap:balance}
+.suspiro h2{font-size:clamp(30px,6vw,56px)}
+.cuenta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;align-items:stretch}
+.cuenta .t{background:var(--papel);color:var(--tinta);border-radius:12px;padding:12px 16px;min-width:96px;text-align:center;box-shadow:5px 5px 0 var(--cian)}
+.cuenta .t b{display:block;font-family:var(--f-display);font-weight:400;font-size:clamp(34px,6vw,52px);line-height:1;font-variant-numeric:tabular-nums}
+.cuenta .t.grande{background:var(--fucsia);color:var(--papel);box-shadow:5px 5px 0 var(--amarillo);animation:latido 1.2s ease-in-out infinite}
+.cuenta .t.grande b{font-size:clamp(56px,11vw,96px)}
+@keyframes latido{0%,100%{transform:scale(1)}15%{transform:scale(1.07)}30%{transform:scale(1)}45%{transform:scale(1.04)}}
+.cuenta .t small{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.suspiro .lbl{font-family:var(--f-mono);font-size:15px;color:var(--suave);margin:16px 0 0}
+.carga{max-width:520px;margin:22px auto 0;text-align:left}
+.carga-txt{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:13px;color:var(--verde);margin-bottom:6px;font-variant-numeric:tabular-nums}
+.barra{height:16px;border:2px solid var(--verde);border-radius:4px;padding:2px}
+.barra i{display:block;height:100%;width:99.9%;background:repeating-linear-gradient(90deg,var(--verde) 0 12px,#0e9d6b 12px 16px);border-radius:2px;animation:casi 2.4s ease-in-out infinite}
+@keyframes casi{0%,100%{width:99.2%}50%{width:99.9%}}
+.botones{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-display);font-size:16px;text-decoration:none;padding:12px 20px;border-radius:999px;border:3px solid var(--tinta);background:var(--amarillo);color:var(--tinta);box-shadow:4px 4px 0 var(--fucsia);transition:transform .15s,box-shadow .15s}
+.btn.alt{background:var(--cian)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--fucsia)}
+
+/* Bando */
+.bando{background:var(--papel);color:var(--tinta);border-radius:4px;padding:28px clamp(16px,4vw,44px);position:relative;box-shadow:inset 0 0 0 3px var(--tinta),inset 0 0 0 9px var(--papel),inset 0 0 0 11px var(--tinta)}
+.bando h2{color:var(--tinta);text-align:center}
+.bando ol{margin:0;padding-left:1.3em;display:grid;gap:10px;max-width:62ch;margin-inline:auto}
+.bando li{font-size:18px}
+.bando li::marker{font-family:var(--f-display);color:var(--fucsia)}
+.firma{text-align:center;margin-top:20px;font-family:var(--f-mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+
+footer{padding-block:36px 56px;text-align:center;color:var(--suave);font-size:15px}
+footer b{color:var(--amarillo)}
+
+@media (max-width:760px){
+  .vivo,.escarapela-zona{grid-template-columns:1fr}
+  .memes{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .detalles{grid-template-columns:1fr}
+  .flag{width:22px;height:30px}
+}
+@media (max-width:420px){.memes{gap:10px}.sello{min-width:0;flex:1 1 40%}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0s!important;animation-iteration-count:1!important}
+}
+</style>
+<meta name="description" content="Ferias y Fiestas del Grado 2026: celebración del grado de Cristian Romero. Viernes 20 de noviembre, 7:00 p. m., Osaki, Bogotá.">
+<meta property="og:title" content="Ferias y Fiestas del Grado 2026">
+<meta property="og:description" content="Viernes 20 de noviembre · 7:00 p. m. · Osaki, Bogotá. ¡No falte!">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1a0f3d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+<style>body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
+
+
+<div class="banderines" aria-hidden="true"><div class="fila" id="fila"></div></div>
+
+<header class="hero">
+  <canvas id="polvora" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="presentan">La Junta de Acción Comunal, el Comité de Festejos y la Honorable Ley de Ohm se permiten presentar las</p>
+    <p class="grandes">GRANDES</p>
+    <h1><span>Ferias y Fiestas</span><span>del Grado</span></h1>
+    <div class="anio">Edición 2026</div>
+    <p class="honor">En honor al hijo ilustre del barrio, el <b>Ingeniero Cristian Alexander Romero Rey</b>, que por fin se graduó.</p>
+    <div class="sellos">
+      <div class="sello"><small>Viernes</small><strong>20 NOV</strong></div>
+      <div class="sello"><small>Hora en punto</small><strong>7:00 PM</strong></div>
+      <div class="sello"><small>Tarima principal</small><strong>OSAKI</strong></div>
+    </div>
+  </div>
+</header>
+
+<div class="perifoneo" aria-label="Anuncio">
+  <div class="cinta" id="cinta"></div>
+</div>
+
+<main>
+  <section class="wrap suspiro" aria-labelledby="t-suspiro">
+    <p class="cronica">Después de años de parciales, trasnochadas, cautines quemados, códigos que no compilaban y un "profe, ¿eso entra en el examen?"…</p>
+    <h2 id="t-suspiro">como último suspiro,<br>ya solo <em>faltan</em></h2>
+    <div class="cuenta" aria-live="off">
+      <div class="t grande"><b id="cd-d">--</b><small>días</small></div>
+      <div class="t"><b id="cd-h">--</b><small>horas</small></div>
+      <div class="t"><b id="cd-m">--</b><small>minutos</small></div>
+      <div class="t"><b id="cd-s">--</b><small>segundos</small></div>
+    </div>
+    <p class="lbl" id="cd-lbl">para que arranque la feria</p>
+    <div class="carga" aria-hidden="true">
+      <div class="carga-txt"><span>Cargando grado…</span><span id="cd-pct">99,9 %</span></div>
+      <div class="barra"><i></i></div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="t-artistas">
+    <p class="eyebrow">Programación oficial</p>
+    <h2 id="t-artistas">Artistas <em>invitados</em></h2>
+    <div class="tarima">
+      <p class="cabeza">Desde la tarima principal y por única vez</p>
+      <p class="headliner">CRISTIAN ROMERO</p>
+      <p class="headliner-sub">y su Diploma Recién Impreso</p>
+      <ul class="artistas">
+        <li>Los Servomotores del Llano<small>Gira "Giro de 180 grados" 2026</small></li>
+        <li>La Orquesta PID<small>Proporcional, Integral y muy Derivativa</small></li>
+        <li>DJ Cortocircuito<small>Con su éxito "Se me fue la fase"</small></li>
+        <li>El Trío Arduino Uno, Dos y Tres</li>
+        <li>Grupo Ohm Sweet Ohm<small>Con resistencia de 220 Ω</small></li>
+      </ul>
+      <div class="separa" aria-hidden="true"></div>
+      <div class="extras">
+        <span>Reinado de la Soldadura de Estaño</span>
+        <span>Cabalgata de robots</span>
+        <span>Quema de pólvora (y de un par de transistores)</span>
+        <span>Sushi en lugar de lechona</span>
+        <span>Brindis por la tesis</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="t-vivo">
+    <div class="vivo">
+      <div class="pantalla">
+        <canvas id="brazo" aria-label="Animación de un brazo robótico dibujando un birrete de graduación"></canvas>
+        <div class="rec"><i></i>EN VIVO · LAB</div>
+        <div class="telemetria" id="tele">θ1 0.0°<br>θ2 0.0°</div>
+      </div>
+      <div>
+        <p class="eyebrow">Transmisión en directo</p>
+        <h2 id="t-vivo">El brazo robótico ya está <em>ensayando</em></h2>
+        <p>Desde el laboratorio, un brazo de dos eslabones con cinemática inversa dibuja el birrete para la ocasión. Lleva años practicando, igual que el homenajeado.</p>
+        <p><code>while(!graduado){ estudiar(); } celebrar();</code></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="t-memes">
+    <p class="eyebrow">Muro del pueblo</p>
+    <h2 id="t-memes">Reacciones de la <em>comunidad</em></h2>
+    <div class="memes" id="memes"></div>
+  </section>
+
+  <section class="wrap" aria-labelledby="t-escarapela">
+    <div class="escarapela-zona">
+      <div class="escarapela" id="escarapela"></div>
+      <div>
+        <p class="eyebrow">Credencial oficial</p>
+        <h2 id="t-escarapela">Ingeniero <em>Pelacables</em></h2>
+        <p style="max-width:44ch;margin:0">Título otorgado tras años de pelar cables con los dientes, soldar con fe y decir "en mi protoboard sí funcionaba". Esa noche se le dice Ingeniero, mínimo tres veces por persona.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="t-detalles">
+    <p class="eyebrow">Lo importante</p>
+    <h2 id="t-detalles">Cuándo y <em>dónde</em></h2>
+    <div class="detalles">
+      <div class="dato"><h3>Qué</h3><p>Comida de celebración del grado<span>Sushi, brindis y aplausos</span></p></div>
+      <div class="dato"><h3>Cuándo</h3><p>Viernes 20 de noviembre<span>7:00 p. m. en punto (bueno, 7:15)</span></p></div>
+      <div class="dato"><h3>Dónde</h3><p>Osaki<span>Bogotá</span></p></div>
+    </div>
+    <div class="botones">
+      <a class="btn" target="_blank" rel="noopener noreferrer" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Celebraci%C3%B3n%20de%20grado%20de%20Cristian&amp;dates=20261120T190000%2F20261120T230000&amp;ctz=America%2FBogota&amp;location=Osaki%2C%20Bogot%C3%A1&amp;details=Ferias%20y%20Fiestas%20del%20Grado%202026">Agregar al calendario</a>
+      <a class="btn alt" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&amp;query=Osaki%20restaurante%20Bogot%C3%A1">Ver en el mapa</a>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="t-bando">
+    <div class="bando">
+      <p class="eyebrow" style="text-align:center;color:#0b8fd0">Decreto municipal n.º 2026-GRADO</p>
+      <h2 id="t-bando">Bando de la feria</h2>
+      <ol>
+        <li>Queda prohibido preguntar "¿y ahora qué vas a hacer?". Multa: pagar el postre.</li>
+        <li>Es obligatorio decirle "Ingeniero" al homenajeado. Tres veces como mínimo.</li>
+        <li>No se reciben solicitudes de arreglar impresoras, celulares ni el control del televisor.</li>
+        <li>La puntualidad colombiana no aplica. Las 7:00 son las 7:00.</li>
+        <li>Se permite llorar de emoción en el brindis. Se recomienda no hacerlo sobre el sushi.</li>
+        <li>Toda persona que diga "eso es fácil, solo es programar" será desconectada de la fuente.</li>
+      </ol>
+      <p class="firma">Firma: El Comité de Festejos · Sello: Ley de Ohm</p>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p><b>¡Los esperamos!</b> Traigan ganas de reír, de comer y de aplaudir.<br>Organiza la familia del homenajeado · Patrocina el café que lo mantuvo despierto.</p>
+</footer>
+
+<script>
+(()=>{
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* Banderines */
+const fila=document.getElementById('fila');
+const n=Math.ceil(window.innerWidth/38)+2;
+for(let i=0;i<n;i++){const f=document.createElement('div');f.className='flag';f.style.animationDelay=(-(i*0.23)%2.6)+'s';fila.appendChild(f);}
+
+/* Perifoneo */
+const msg=['Atención, atención comunidad','Se informa que el muchacho se graduó','Habrá sushi, brindis y aplausos','Viernes 20 de noviembre, 7:00 p. m., en Osaki','No falte, que el Ingeniero lo anota','Se ruega no llevar el multímetro'];
+const cinta=document.getElementById('cinta');
+const linea=msg.map(m=>'<span>📢 '+m+'</span>').join('');
+cinta.innerHTML=linea+linea;
+
+/* Pólvora */
+const pc=document.getElementById('polvora'),px=pc.getContext('2d');
+let W,H,dpr=Math.min(devicePixelRatio||1,2),parts=[],cohetes=[];
+function rs(){W=pc.clientWidth;H=pc.clientHeight;pc.width=W*dpr;pc.height=H*dpr;px.setTransform(dpr,0,0,dpr,0,0);}
+rs();addEventListener('resize',rs);
+const cols=['#ff2e88','#ffd23f','#12c98a','#2ec4ff','#ff7a1a','#fff6e0'];
+function lanzar(){cohetes.push({x:W*(.1+Math.random()*.8),y:H,vy:-(5+Math.random()*3.5),meta:H*(.12+Math.random()*.35),c:cols[Math.random()*cols.length|0]});}
+function estallar(x,y,c){const k=46;for(let i=0;i<k;i++){const a=i/k*Math.PI*2,s=1.5+Math.random()*2.8;parts.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,l:1,c});}}
+let tt=0;
+function polvora(){
+  px.globalCompositeOperation='destination-out';px.fillStyle='rgba(0,0,0,.18)';px.fillRect(0,0,W,H);
+  px.globalCompositeOperation='lighter';
+  if(++tt%38===0&&cohetes.length<3)lanzar();
+  cohetes=cohetes.filter(r=>{r.y+=r.vy;px.fillStyle=r.c;px.fillRect(r.x,r.y,2,6);if(r.y<=r.meta){estallar(r.x,r.y,r.c);return false}return true});
+  parts=parts.filter(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.035;p.vx*=.985;p.l-=.012;px.globalAlpha=Math.max(p.l,0)*.85;px.fillStyle=p.c;px.beginPath();px.arc(p.x,p.y,1.8,0,7);px.fill();return p.l>0});
+  px.globalAlpha=1;
+  requestAnimationFrame(polvora);
+}
+if(!reduce){lanzar();polvora();}
+
+/* Brazo robótico con cinemática inversa */
+const bc=document.getElementById('brazo'),bx=bc.getContext('2d'),tele=document.getElementById('tele');
+let BW,BH;
+function rb(){BW=bc.clientWidth;BH=bc.clientHeight;bc.width=BW*dpr;bc.height=BH*dpr;bx.setTransform(dpr,0,0,dpr,0,0);}
+rb();addEventListener('resize',rb);
+// Birrete normalizado (0..1)
+const birrete=[[.5,.18],[.92,.36],[.5,.54],[.08,.36],[.5,.18],[.5,.54],[.26,.45],[.26,.72],[.5,.8],[.74,.72],[.74,.45],[.5,.54],[.92,.36],[.92,.62],[.88,.7],[.96,.7],[.92,.62]];
+const segs=[];let total=0;
+for(let i=1;i<birrete.length;i++){const a=birrete[i-1],b=birrete[i],d=Math.hypot(b[0]-a[0],b[1]-a[1]);segs.push({a,b,d});total+=d;}
+function punto(t){let r=t*total;for(const s of segs){if(r<=s.d){const k=r/s.d;return[s.a[0]+(s.b[0]-s.a[0])*k,s.a[1]+(s.b[1]-s.a[1])*k]}r-=s.d}return birrete[birrete.length-1];}
+let rastro=[],chispas=[],ft=0;
+function brazo(){
+  bx.fillStyle='#0b0820';bx.fillRect(0,0,BW,BH);
+  // rejilla
+  bx.strokeStyle='rgba(46,196,255,.08)';bx.lineWidth=1;
+  for(let x=0;x<BW;x+=24){bx.beginPath();bx.moveTo(x,0);bx.lineTo(x,BH);bx.stroke()}
+  for(let y=0;y<BH;y+=24){bx.beginPath();bx.moveTo(0,y);bx.lineTo(BW,y);bx.stroke()}
+  const area={x:BW*.38,y:BH*.08,w:BW*.56,h:BH*.6};
+  const base={x:BW*.2,y:BH*.9};
+  const L1=Math.hypot(BW,BH)*.36,L2=Math.hypot(BW,BH)*.3;
+  const ciclo=520,t=(ft%(ciclo+90))/ciclo;ft++;
+  const tc=Math.min(t,1);
+  const p=punto(tc),tx=area.x+p[0]*area.w,ty=area.y+p[1]*area.h;
+  if(t<=1){rastro.push([tx,ty]);for(let i=0;i<3;i++)chispas.push({x:tx,y:ty,vx:(Math.random()-.5)*4,vy:-Math.random()*3,l:1})}
+  if(t>1&&ft%(ciclo+90)===0)rastro=[];
+  // rastro
+  bx.lineCap='round';bx.lineJoin='round';bx.strokeStyle='#ffd23f';bx.lineWidth=3.5;bx.shadowColor='#ffd23f';bx.shadowBlur=12;
+  bx.beginPath();rastro.forEach((q,i)=>i?bx.lineTo(q[0],q[1]):bx.moveTo(q[0],q[1]));bx.stroke();bx.shadowBlur=0;
+  // IK
+  const dx=tx-base.x,dy=ty-base.y,d=Math.min(Math.hypot(dx,dy),L1+L2-1);
+  const c2=(d*d-L1*L1-L2*L2)/(2*L1*L2),t2=-Math.acos(Math.max(-1,Math.min(1,c2)));
+  const t1=Math.atan2(dy,dx)-Math.atan2(L2*Math.sin(t2),L1+L2*Math.cos(t2));
+  const ex=base.x+L1*Math.cos(t1),ey=base.y+L1*Math.sin(t1);
+  const fx=ex+L2*Math.cos(t1+t2),fy=ey+L2*Math.sin(t1+t2);
+  // base
+  bx.fillStyle='#3b2a80';bx.fillRect(base.x-34,base.y,68,BH-base.y);
+  bx.fillStyle='#ff7a1a';bx.beginPath();bx.arc(base.x,base.y,15,Math.PI,0);bx.fill();
+  // eslabones
+  bx.strokeStyle='#ff7a1a';bx.lineWidth=16;bx.beginPath();bx.moveTo(base.x,base.y);bx.lineTo(ex,ey);bx.stroke();
+  bx.strokeStyle='#ff2e88';bx.lineWidth=11;bx.beginPath();bx.moveTo(ex,ey);bx.lineTo(fx,fy);bx.stroke();
+  [[base.x,base.y,10],[ex,ey,9]].forEach(([x,y,r])=>{bx.fillStyle='#fff6e0';bx.beginPath();bx.arc(x,y,r,0,7);bx.fill();bx.fillStyle='#1a0f3d';bx.beginPath();bx.arc(x,y,r*.4,0,7);bx.fill()});
+  // efector
+  bx.fillStyle='#2ec4ff';bx.beginPath();bx.arc(fx,fy,6,0,7);bx.fill();
+  // chispas
+  chispas=chispas.filter(s=>{s.x+=s.vx;s.y+=s.vy;s.vy+=.15;s.l-=.04;bx.globalAlpha=Math.max(s.l,0);bx.fillStyle=Math.random()<.5?'#fff6e0':'#ffd23f';bx.fillRect(s.x,s.y,2,2);return s.l>0});
+  bx.globalAlpha=1;
+  if(t>1){bx.font='700 '+Math.max(14,BW*.045)+'px "JetBrains Mono",monospace';bx.fillStyle='#12c98a';bx.textAlign='center';bx.fillText('¡GRADUADO! ✔',area.x+area.w/2,BH*.93);}
+  if(ft%4===0)tele.innerHTML='θ1 '+((-t1*180/Math.PI)).toFixed(1).padStart(6,' ')+'°<br>θ2 '+((-t2*180/Math.PI)).toFixed(1).padStart(6,' ')+'°';
+  if(!reduce)requestAnimationFrame(brazo);
+}
+brazo();
+
+/* Memes (criaturas originales en SVG con textura de fieltro) */
+const felt='<defs><filter id="F" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="4"/></filter><radialGradient id="V" cx="50%" cy="45%" r="70%"><stop offset="60%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity=".55"/></radialGradient></defs>';
+const ojo=(x,y,r,col='#fff')=>`<g class="parpadeo"><ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r*1.1}" fill="${col}"/><circle cx="${x+r*.15}" cy="${y+r*.1}" r="${r*.5}" fill="#111"/><circle cx="${x+r*.3}" cy="${y-r*.15}" r="${r*.15}" fill="#fff"/></g>`;
+const criaturas={
+  bigote:`<rect width="200" height="200" fill="#6fae3f"/><rect y="120" width="200" height="80" fill="#3d7a2a"/><g class="anim-wobble"><g filter="url(#F)"><ellipse cx="100" cy="112" rx="78" ry="70" fill="#3d6fd6"/><ellipse cx="38" cy="70" rx="24" ry="20" fill="#3d6fd6"/><ellipse cx="162" cy="70" rx="24" ry="20" fill="#3d6fd6"/><ellipse cx="38" cy="70" rx="13" ry="10" fill="#f2a7b8"/><ellipse cx="162" cy="70" rx="13" ry="10" fill="#f2a7b8"/><path d="M42 58 Q100 18 158 58 Q120 40 100 46 Q78 40 42 58Z" fill="#222"/></g>${ojo(76,92,17)}${ojo(124,92,17)}<circle cx="100" cy="122" r="12" fill="#f4b3c2"/><path d="M58 142 Q78 124 100 138 Q122 124 142 142 Q122 156 100 146 Q78 156 58 142Z" fill="#222"/></g>`,
+  gato:`<rect width="200" height="200" fill="#d9c3a5"/><g class="anim-zoom"><g filter="url(#F)"><path d="M40 70 L52 20 L84 52 Z M160 70 L148 20 L116 52Z" fill="#e3893a"/><ellipse cx="100" cy="112" rx="72" ry="66" fill="#e3893a"/><ellipse cx="100" cy="140" rx="40" ry="28" fill="#f6dcc0"/></g><path d="M66 102 q12 -6 24 0 M110 102 q12 -6 24 0" stroke="#3a2210" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M70 104 q10 8 20 0 M110 104 q10 8 20 0" fill="#7a5a14"/><path d="M94 128 h12 l-6 7z" fill="#c45a6a"/><path d="M88 146 q12 -8 24 0" stroke="#3a2210" stroke-width="4" fill="none"/><path d="M50 132 h-30 M50 140 h-28 M150 132 h30 M150 140 h28" stroke="#fff" stroke-width="2"/></g>`,
+  robot:`<rect width="200" height="200" fill="#ffd23f"/><g class="anim-shake"><rect x="94" y="22" width="12" height="24" fill="#555"/><circle cx="100" cy="20" r="9" fill="#ff2e88"/><rect x="40" y="46" width="120" height="100" rx="18" fill="#9aa7b8" stroke="#3a4250" stroke-width="5"/><rect x="56" y="66" width="88" height="40" rx="10" fill="#1a0f3d"/><circle cx="80" cy="86" r="10" fill="#12c98a"/><circle cx="120" cy="86" r="10" fill="#12c98a"/><rect x="72" y="118" width="56" height="14" rx="4" fill="#3a4250"/><path d="M78 118 v14 M90 118 v14 M102 118 v14 M114 118 v14" stroke="#9aa7b8" stroke-width="3"/><rect x="26" y="80" width="14" height="30" rx="5" fill="#ff7a1a"/><rect x="160" y="80" width="14" height="30" rx="5" fill="#ff7a1a"/><path d="M60 150 l-14 40 M140 150 l14 40" stroke="#3a4250" stroke-width="10"/></g><path d="M150 40 l8 -14 l4 10 l10 -8" stroke="#ff2e88" stroke-width="4" fill="none"/>`,
+  oso:`<rect width="200" height="200" fill="#7fa6d6"/><rect y="130" width="200" height="70" fill="#eef3fb"/><g class="anim-flota"><g filter="url(#F)"><circle cx="70" cy="56" r="18" fill="#f1f1ec"/><circle cx="150" cy="60" r="18" fill="#f1f1ec"/><ellipse cx="110" cy="112" rx="74" ry="64" fill="#f1f1ec"/><ellipse cx="152" cy="128" rx="34" ry="26" fill="#e3e3dc"/></g><circle cx="94" cy="100" r="7" fill="#111"/><circle cx="134" cy="98" r="7" fill="#111"/><ellipse cx="176" cy="122" rx="10" ry="8" fill="#111"/><path d="M150 146 q10 6 20 0" stroke="#111" stroke-width="3" fill="none"/></g>`,
+  negro:`<rect width="200" height="200" fill="#2a2a2a"/><g class="anim-zoom"><g filter="url(#F)"><path d="M36 72 L48 22 L82 56Z M164 72 L152 22 L118 56Z" fill="#0d0d0d"/><ellipse cx="100" cy="116" rx="80" ry="70" fill="#0d0d0d"/></g><ellipse cx="72" cy="104" rx="20" ry="16" fill="#b8f04a"/><ellipse cx="128" cy="104" rx="20" ry="16" fill="#b8f04a"/><ellipse cx="72" cy="104" rx="5" ry="14" fill="#0d0d0d"/><ellipse cx="128" cy="104" rx="5" ry="14" fill="#0d0d0d"/></g><rect width="200" height="200" fill="#ff2e00" opacity=".12"/>`,
+  naranja:`<rect width="200" height="200" fill="#0f6b3a"/><g class="anim-wobble"><g filter="url(#F)"><circle cx="100" cy="118" r="70" fill="#f08a1c"/></g><path d="M30 64 Q100 40 170 64 L160 74 Q100 58 40 74Z" fill="#f4ead2" stroke="#1a1a1a" stroke-width="2"/><path d="M38 70 Q100 52 162 70" stroke="#1a1a1a" stroke-width="4" stroke-dasharray="6 5" fill="none"/><path d="M64 60 Q100 4 136 60Z" fill="#f4ead2" stroke="#1a1a1a" stroke-width="2"/><path d="M72 50 h56 M80 36 h40" stroke="#1a1a1a" stroke-width="4" stroke-dasharray="5 4"/>${ojo(78,108,15)}${ojo(122,108,15)}<path d="M56 138 Q78 124 100 136 Q122 124 144 138 Q122 152 100 142 Q78 152 56 138Z" fill="#2a1a0a"/><ellipse cx="100" cy="162" rx="12" ry="8" fill="#5a1a0a"/></g>`
+};
+const memes=[
+  {c:'bigote',t:'sacreblu, ya es ingeniero'},
+  {c:'gato',t:'¿faltar a la feria? pamplinas'},
+  {c:'robot',t:'yo después de sustentar',arriba:true},
+  {c:'oso',t:'Q te iba a decí… q te espero el 20'},
+  {c:'negro',t:'Diavlo, se graduó'},
+  {c:'naranja',t:'dios mío, hay sushi'}
+];
+document.getElementById('memes').innerHTML=memes.map((m,i)=>`<figure class="meme" style="margin:0"><svg viewBox="0 0 200 200" role="img" aria-label="${m.t}">${felt.replaceAll('id="F"','id="F'+i+'"').replaceAll('id="V"','id="V'+i+'"')}${criaturas[m.c].replaceAll('url(#F)','url(#F'+i+')')}<rect width="200" height="200" fill="url(#V${i})"/></svg><span class="gif">GIF</span><figcaption${m.arriba?' class="arriba"':''}>${m.t}</figcaption></figure>`).join('');
+
+/* Escarapela: robot original con gafas, cautín y portátil */
+document.getElementById('escarapela').innerHTML=`<svg viewBox="0 0 340 300" role="img" aria-label="Escarapela: Cristian Romero, Ingeniero Pelacables">
+<defs><linearGradient id="esm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e6e2da"/></linearGradient></defs>
+<g transform="translate(110,10)">
+  <rect x="44" y="0" width="8" height="20" fill="#3a4250"/><circle cx="48" cy="0" r="8" fill="#ff2e88"><animate attributeName="fill" values="#ff2e88;#ffd23f;#ff2e88" dur="1s" repeatCount="indefinite"/></circle>
+  <rect x="6" y="18" width="84" height="70" rx="16" fill="#ffd23f" stroke="#1a0f3d" stroke-width="4"/>
+  <circle cx="32" cy="52" r="13" fill="#fff" stroke="#1a0f3d" stroke-width="4"/><circle cx="64" cy="52" r="13" fill="#fff" stroke="#1a0f3d" stroke-width="4"/><path d="M45 52 h6" stroke="#1a0f3d" stroke-width="4"/>
+  <circle cx="34" cy="53" r="5" fill="#1a0f3d"/><circle cx="66" cy="53" r="5" fill="#1a0f3d"/>
+  <circle cx="18" cy="72" r="6" fill="#ff2e88" opacity=".8"/><circle cx="78" cy="72" r="6" fill="#ff2e88" opacity=".8"/>
+  <path d="M38 74 q10 10 20 0" stroke="#1a0f3d" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <rect x="14" y="86" width="68" height="40" rx="8" fill="#2ec4ff" stroke="#1a0f3d" stroke-width="4"/>
+  <g><animateTransform attributeName="transform" type="rotate" values="0 96 96;-12 96 96;0 96 96" dur="1.2s" repeatCount="indefinite"/>
+    <rect x="86" y="88" width="44" height="9" rx="4" fill="#ff7a1a" stroke="#1a0f3d" stroke-width="3"/><path d="M130 92 l18 0" stroke="#9aa7b8" stroke-width="4"/>
+    <g fill="#ffd23f"><circle cx="152" cy="92" r="3"><animate attributeName="r" values="1;5;1" dur=".4s" repeatCount="indefinite"/></circle><path d="M154 84 l6 -8 M156 98 l7 6 M158 92 l9 0" stroke="#ffd23f" stroke-width="2"/></g>
+  </g>
+</g>
+<rect x="96" y="104" width="148" height="70" rx="6" fill="#9aa7b8" stroke="#1a0f3d" stroke-width="4"/><rect x="104" y="112" width="132" height="54" rx="3" fill="#1a0f3d"/>
+<text x="112" y="132" font-family="JetBrains Mono,monospace" font-size="11" fill="#12c98a">$ make grado</text>
+<text x="112" y="150" font-family="JetBrains Mono,monospace" font-size="11" fill="#ffd23f">OK ✔ 0 errores</text>
+<rect x="10" y="168" width="320" height="104" rx="18" fill="url(#esm)" stroke="#cfc8bb" stroke-width="2"/>
+<rect x="18" y="176" width="304" height="88" rx="12" fill="none" stroke="#fff" stroke-width="2" opacity=".8"/>
+<text x="170" y="218" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="26" font-weight="700" fill="#2b2b2b">Cristian Romero</text>
+<text x="170" y="246" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="14" letter-spacing="2" fill="#444">INGENIERO PELACABLES</text>
+</svg>`;
+
+/* Cuenta regresiva */
+const meta=new Date('2026-11-20T19:00:00-05:00').getTime();
+const $=id=>document.getElementById(id);
+function tic(){
+  let r=Math.max(0,meta-Date.now());
+  const d=Math.floor(r/864e5);r%=864e5;const h=Math.floor(r/36e5);r%=36e5;const m=Math.floor(r/6e4);const s=Math.floor(r%6e4/1e3);
+  $('cd-d').textContent=d;$('cd-h').textContent=String(h).padStart(2,'0');$('cd-m').textContent=String(m).padStart(2,'0');$('cd-s').textContent=String(s).padStart(2,'0');
+  const lbl=$('cd-lbl');
+  if(meta-Date.now()<=0)lbl.textContent='¡La feria ya arrancó! Corra que se acaba el sushi.';
+  else if(d===0)lbl.textContent='¡Es HOY! Aliste la pinta y el estómago.';
+  else if(d===1)lbl.textContent='Mañana es el día. Ya huele a pólvora.';
+  else lbl.textContent='para que arranque la feria';
+}
+tic();setInterval(tic,1000);
+})();
+</script>
+
+</body>
+</html>
