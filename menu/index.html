@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Menú del Grado</title>
+<meta name="description" content="Elige tu plato fuerte y tu bebida para la celebración del grado de Cristian. Viernes 20 de noviembre, 7:00 p. m., Osaki Zona G, Calle 71 # 5-50, Bogotá.">
+<meta property="og:title" content="Menú del Grado · Elige tu plato">
+<meta property="og:description" content="Celebración del grado de Cristian · Viernes 20 de noviembre, 7:00 p. m. · Osaki. Elige antes del 11 de noviembre.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1a0f3d">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%B1%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Bungee&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: misma noche de feria de la invitación, pero sobria — encabezado con datos del evento y una tarjeta de papel por invitado. */
+:root{
+  --noche:#1a0f3d; --noche-2:#24145a; --linea:#3b2a80;
+  --papel:#fff8ea; --papel-2:#f3ead6; --tinta:#1a0f3d; --tinta-2:#5a4f86;
+  --fucsia:#e0246f; --amarillo:#ffd23f; --verde:#0f9e6e; --cian:#2ec4ff; --error:#c4223a;
+  --suave:#c9bff0;
+  --f-display:"Bungee","Arial Black",Impact,sans-serif;
+  --f-body:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{background:var(--noche)}
+body{margin:0;background:var(--noche);color:var(--papel);font-family:var(--f-body);font-size:17px;line-height:1.5;overflow-x:hidden}
+[hidden]{display:none!important}
+.wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--cian)}
+:focus-visible{outline:3px solid var(--amarillo);outline-offset:2px;border-radius:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Banderines discretos */
+.banderines{height:22px;display:flex;justify-content:space-around;overflow:hidden;border-top:2px solid #e9dcb8;opacity:.9}
+.banderines i{width:16px;height:20px;clip-path:polygon(0 0,100% 0,50% 100%)}
+.banderines i:nth-child(5n+1){background:var(--fucsia)}.banderines i:nth-child(5n+2){background:var(--amarillo)}.banderines i:nth-child(5n+3){background:var(--verde)}.banderines i:nth-child(5n+4){background:var(--cian)}.banderines i:nth-child(5n){background:#ff7a1a}
+
+header{padding-block:28px 8px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--cian);font-weight:700;margin:0 0 6px}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(34px,7vw,56px);line-height:1;margin:0;color:var(--amarillo);text-wrap:balance}
+.intro{max-width:60ch;margin:16px 0 0;color:#ece6ff;font-size:18px}
+.intro b{color:var(--papel)}
+
+.datos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:24px}
+.dato{background:var(--noche-2);border:1px solid var(--linea);border-radius:12px;padding:12px 14px;min-width:0}
+.dato h2{margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--suave);font-weight:700}
+.dato p{margin:2px 0 0;font-weight:700;font-size:17px;line-height:1.25}
+.dato p span{display:block;font-weight:500;font-size:14px;color:var(--suave)}
+.dato.plazo{border-color:var(--amarillo);background:#2d1d63}
+.dato.plazo p{color:var(--amarillo)}
+
+.reglas{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;font-size:15px}
+.reglas span{border:1px solid var(--linea);border-radius:999px;padding:4px 12px;color:#ece6ff}
+
+/* Estado (cerrado / ya enviado / sin conectar) */
+.aviso{margin-top:22px;border-radius:12px;padding:14px 16px;background:var(--papel);color:var(--tinta);border-left:6px solid var(--amarillo)}
+.aviso h2{margin:0 0 4px;font-size:18px}
+.aviso p{margin:0}
+.aviso.ok{border-left-color:var(--verde)}
+.aviso.mal{border-left-color:var(--error)}
+.aviso ul{margin:8px 0 0;padding-left:1.2em}
+.aviso .acciones{margin-top:10px;display:flex;gap:10px;flex-wrap:wrap}
+
+/* Formulario */
+main{padding-block:16px 40px}
+.persona{color-scheme:light;background:var(--papel);color:var(--tinta);border-radius:16px;padding:20px clamp(14px,3vw,28px) 24px;margin-top:20px;box-shadow:0 10px 0 -4px var(--fucsia)}
+.persona-cab{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.persona-cab h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.02em}
+.quitar{background:none;border:1px solid var(--tinta-2);color:var(--tinta-2);border-radius:999px;padding:4px 12px;font:600 14px var(--f-body);cursor:pointer}
+.quitar:hover{border-color:var(--error);color:var(--error)}
+label.campo{display:block;font-weight:700;margin-bottom:4px}
+.ayuda{font-size:14px;color:var(--tinta-2);font-weight:500}
+input[type=text],textarea,input[type=password]{width:100%;font:500 17px var(--f-body);color:var(--tinta);background:#fff;border:2px solid #d8ccb0;border-radius:10px;padding:10px 12px}
+input[type=text]:focus,textarea:focus,input[type=password]:focus{border-color:var(--fucsia);outline:none;box-shadow:0 0 0 3px rgba(224,36,111,.2)}
+textarea{min-height:72px;resize:vertical}
+fieldset{border:0;margin:22px 0 0;padding:0;min-width:0}
+legend{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--fucsia);padding:0;margin-bottom:10px}
+legend b{color:var(--tinta);letter-spacing:.06em}
+.opciones{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.op{position:relative;display:block;border:2px solid #e2d6bb;background:#fff;border-radius:12px;padding:12px 14px 12px 44px;transition:border-color .15s,background .15s;min-width:0}
+.op-main{display:block;cursor:pointer}
+.op-main::after{content:"";position:absolute;inset:0;border-radius:10px}
+.op .variante{position:relative;z-index:1}
+.op:hover{border-color:#c9b98f}
+.op-main input{position:absolute;left:14px;top:15px;width:20px;height:20px;accent-color:var(--fucsia);margin:0}
+.op strong{display:block;font-size:17px;line-height:1.25}
+.op .desc{display:block;font-size:14.5px;color:#3d3566;line-height:1.4;margin-top:3px}
+.op .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.op .tags span{font-family:var(--f-mono);font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--papel-2);color:var(--tinta-2);padding:1px 7px;border-radius:999px}
+.op .tags span.veg{background:#d9f3e8;color:#0b6b4b}
+.op:has(.op-main input:checked){border-color:var(--fucsia);background:#fff2f7}
+.variante{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.variante label{display:inline-flex;align-items:center;gap:6px;border:1.5px solid #d8ccb0;border-radius:999px;padding:3px 12px;font-size:15px;font-weight:600;background:var(--papel)}
+.variante label:has(input:checked){border-color:var(--fucsia);background:#ffe3ee}
+.variante input{accent-color:var(--fucsia);margin:0}
+.err{color:var(--error);font-weight:700;font-size:15px;margin:10px 0 0}
+.invalido{border-color:var(--error)!important}
+fieldset.invalido-g legend{color:var(--error)}
+
+.barra-acciones{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-top:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:400 16px var(--f-display);letter-spacing:.02em;padding:12px 22px;border-radius:999px;border:2px solid var(--tinta);background:var(--amarillo);color:var(--tinta);cursor:pointer;text-decoration:none;box-shadow:3px 3px 0 var(--fucsia);transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--fucsia)}
+.btn:disabled{opacity:.6;cursor:progress;transform:none}
+.btn.sec{background:transparent;color:var(--papel);border-color:var(--suave);box-shadow:none;font:700 16px var(--f-body)}
+.btn.sec:hover{border-color:var(--papel)}
+.btn.claro{background:var(--papel);box-shadow:none;font:700 15px var(--f-body);padding:8px 16px}
+.nota-envio{font-size:14px;color:var(--suave);max-width:46ch;margin:12px 0 0}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+footer{padding-block:28px 40px;color:var(--suave);font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px solid var(--linea)}
+.ohm{background:none;border:0;color:var(--linea);font:700 14px var(--f-mono);cursor:pointer;padding:6px;line-height:1}
+.ohm:hover,.ohm:focus-visible{color:var(--suave)}
+
+/* Administración */
+dialog{color-scheme:light;border:0;border-radius:16px;padding:0;background:var(--papel);color:var(--tinta);width:min(980px,calc(100vw - 24px));max-height:calc(100dvh - 24px)}
+dialog::backdrop{background:rgba(10,6,30,.75)}
+.dlg{padding:20px clamp(14px,3vw,28px)}
+.dlg h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:22px}
+.dlg-cab{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.cerrar{background:none;border:0;font-size:26px;line-height:1;cursor:pointer;color:var(--tinta);padding:4px 8px}
+.login{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;max-width:420px}
+.login div{flex:1 1 180px}
+.resumen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:8px 0 16px}
+.caja{background:#fff;border:1px solid #e2d6bb;border-radius:12px;padding:12px 14px;min-width:0}
+.caja h3{margin:0 0 6px;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-2)}
+.caja .grande{font-family:var(--f-display);font-size:38px;line-height:1;font-variant-numeric:tabular-nums}
+.caja ul{list-style:none;margin:0;padding:0;font-size:15px}
+.caja li{display:flex;justify-content:space-between;gap:8px;padding:2px 0;border-bottom:1px dashed #e8dec8}
+.caja li b{font-variant-numeric:tabular-nums}
+.tabla{overflow-x:auto;border:1px solid #e2d6bb;border-radius:12px;background:#fff}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:680px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #eee3cc;vertical-align:top}
+th{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--tinta-2);background:var(--papel-2);position:sticky;top:0}
+td.fecha{font-family:var(--f-mono);font-size:12px;white-space:nowrap;color:var(--tinta-2)}
+.adm-acciones{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.estado{font-size:14px;color:var(--tinta-2);margin:8px 0 0;min-height:1.4em}
+
+@media (max-width:760px){
+  .datos{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .opciones{grid-template-columns:1fr}
+  .resumen{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="banderines" aria-hidden="true" id="banderines"></div>
+
+<header class="wrap">
+  <p class="eyebrow">Ferias y Fiestas del Grado 2026 · Tarjeta de menú</p>
+  <h1>Elige tu plato</h1>
+  <p class="intro">Personas muy queridas quisieron regalarme esta comida para celebrar mi grado. Para hacer la reserva, <b>Osaki necesita saber con anticipación qué va a comer y tomar cada invitado</b>. Cada persona elige <b>1 plato fuerte</b> y <b>1 bebida</b>. ¡Gracias por acompañarme!</p>
+  <div class="datos">
+    <div class="dato"><h2>Fecha</h2><p>Viernes 20 de noviembre<span>2026</span></p></div>
+    <div class="dato"><h2>Hora</h2><p>7:00 p. m.<span>Llega 10 minutos antes</span></p></div>
+    <div class="dato"><h2>Lugar</h2><p>Osaki Zona G<span>Calle 71 # 5-50 · <a href="https://www.google.com/maps/search/?api=1&amp;query=Osaki%20Zona%20G%20Calle%2071%20%235-50%20Bogot%C3%A1" target="_blank" rel="noopener noreferrer">ver mapa</a></span></p></div>
+    <div class="dato plazo"><h2>Responde antes de</h2><p>Miércoles 11 de noviembre<span id="restante">Hasta las 11:59 p. m.</span></p></div>
+  </div>
+  <div class="reglas" aria-label="Reglas">
+    <span>1 plato fuerte por persona</span><span>1 bebida por persona</span><span>Puedes registrar a tus acompañantes</span>
+  </div>
+  <div id="aviso" class="aviso" role="status" hidden></div>
+</header>
+
+<main class="wrap">
+  <form id="form" novalidate>
+    <div id="personas"></div>
+    <input class="hp" type="text" id="web" name="web" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="barra-acciones">
+      <button type="button" class="btn sec" id="agregar">+ Agregar otra persona</button>
+      <button type="submit" class="btn" id="enviar">Enviar elección</button>
+    </div>
+    <p class="nota-envio">Si necesitas cambiar algo, vuelve a enviar con el mismo nombre antes del 11 de noviembre y se actualiza tu elección.</p>
+    <p id="error-general" class="err" role="alert" hidden></p>
+  </form>
+</main>
+
+<footer class="wrap">
+  <span><a href="../">Volver a la invitación</a> · Ferias y Fiestas del Grado 2026</span>
+  <button type="button" class="ohm" id="ohm" aria-label="Administración">Ω</button>
+</footer>
+
+<dialog id="admin" aria-labelledby="adm-titulo">
+  <div class="dlg">
+    <div class="dlg-cab">
+      <h2 id="adm-titulo">Administración</h2>
+      <button type="button" class="cerrar" id="adm-cerrar" aria-label="Cerrar">×</button>
+    </div>
+    <form id="login" class="login" novalidate>
+      <div>
+        <label class="campo" for="clave">Contraseña</label>
+        <input type="password" id="clave" inputmode="numeric" autocomplete="off" maxlength="32">
+      </div>
+      <button type="submit" class="btn" id="entrar">Ver respuestas</button>
+    </form>
+    <p class="estado" id="adm-estado" role="status"></p>
+    <div id="panel" hidden>
+      <div class="resumen">
+        <div class="caja"><h3>Personas registradas</h3><div class="grande" id="r-total">0</div></div>
+        <div class="caja"><h3>Platos fuertes</h3><ul id="r-platos"></ul></div>
+        <div class="caja"><h3>Bebidas</h3><ul id="r-bebidas"></ul></div>
+      </div>
+      <div class="tabla">
+        <table>
+          <thead><tr><th>Nombre</th><th>Plato fuerte</th><th>Bebida</th><th>Observaciones</th><th>Registró</th><th>Fecha</th></tr></thead>
+          <tbody id="r-filas"></tbody>
+        </table>
+      </div>
+      <div class="adm-acciones">
+        <button type="button" class="btn claro" id="copiar">Copiar resumen para el restaurante</button>
+        <button type="button" class="btn claro" id="csv">Descargar CSV</button>
+        <button type="button" class="btn claro" id="refrescar">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<template id="tpl-persona">
+  <section class="persona">
+    <div class="persona-cab">
+      <h2 class="p-titulo">Invitado 1</h2>
+      <button type="button" class="quitar">Quitar</button>
+    </div>
+    <label class="campo p-lbl-nombre">Nombre y apellido</label>
+    <input type="text" class="p-nombre" autocomplete="name" maxlength="80" required>
+    <fieldset class="p-platos"><legend>Plato fuerte · <b>elige 1</b></legend><div class="opciones"></div></fieldset>
+    <fieldset class="p-bebidas"><legend>Bebida · <b>elige 1</b></legend><div class="opciones"></div></fieldset>
+    <fieldset>
+      <label class="campo p-lbl-obs">Alergias o indicaciones para la cocina <span class="ayuda">(opcional)</span></label>
+      <textarea class="p-obs" maxlength="300" placeholder="Ej.: sin cilantro, alergia al maní…"></textarea>
+    </fieldset>
+    <p class="err p-err" role="alert" hidden></p>
+  </section>
+</template>
+
+<script>
+(() => {
+'use strict';
+
+/* ====== CONFIGURACIÓN ====== */
+// Pega aquí la URL de tu Apps Script (termina en /exec)
+const SCRIPT_URL = '';
+const CIERRE = new Date('2026-11-12T00:00:00-05:00');
+const MAX_PERSONAS = 8;
+
+/* ====== Carta (descripciones tomadas del menú de Osaki) ====== */
+const PLATOS = [
+  {id:'lomo', nombre:'Lomo saltado', desc:'Trozos de lomo de res salteados al wok con cebolla roja, tomate fresco, maíz tierno, cilantro, papa frita, limón y ajonjolí. Con huevo frito y arroz al vapor.', tags:['Res','Huevo']},
+  {id:'pescado', nombre:'Pescado a la parrilla sobre mango', desc:'Pesca fresca del día sobre mango, con lechugas asiáticas, hierbas frescas, marañones y tomate, en infusión de nampla, azúcar de palma y limón.', tags:['Pescado','Marañón']},
+  {id:'khao', nombre:'Khao pad', desc:'Trozos de pollo o cerdo salteados al wok con jengibre y hierbas frescas. Sobre arroz crujiente, con huevo pochado, encurtido de cohombro y salsa waiya.', tags:['Huevo'], variantes:['Pollo','Cerdo'], varLbl:'Proteína'},
+  {id:'tailandes', nombre:'Arroz tailandés', desc:'Camarones salteados al wok con arroz, tortilla de huevo, tomate y pasta de camarón. Con cerdo caramelizado y mango.', tags:['Camarón','Cerdo','Huevo']},
+  {id:'poke', nombre:'Poke de camarones', desc:'Camarones en mayonesa de chipotle, ensalada de algas, aguacate y furikake, servido sobre arroz de sushi.', tags:['Camarón','Picante suave']},
+  {id:'cantones', nombre:'Cantonés vegetariano', desc:'Arroz salteado al wok con vegetales, jengibre, soya y ajonjolí.', tags:['Vegano'], veg:true}
+];
+const BEBIDAS = [
+  {id:'agua', nombre:'Agua Manantial', desc:'Agua de manantial.', variantes:['Sin gas','Con gas'], varLbl:'Tipo'},
+  {id:'coca', nombre:'Coca-Cola', desc:'Gaseosa.', variantes:['Original','Zero'], varLbl:'Tipo'},
+  {id:'rangpur', nombre:'Limonada Rangpur', desc:'Limón rangpur, hierbabuena y panela.'},
+  {id:'bali', nombre:'Limonada Bali', desc:'Extracto de maracuyá, limón tahití y agua de jamaica.'},
+  {id:'mango', nombre:'Jugo de mango biche', desc:'Jugo natural de mango verde, ácido y refrescante.'},
+  {id:'melones', nombre:'Dos melones', desc:'Extracto de sandía y melón.'}
+];
+
+const $ = s => document.querySelector(s);
+const el = (tag, props = {}, ...hijos) => {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(props)) {
+    if (k === 'class') n.className = v;
+    else if (k === 'text') n.textContent = v;
+    else n.setAttribute(k, v);
+  }
+  hijos.forEach(h => h && n.append(h));
+  return n;
+};
+const store = {
+  get(k){ try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
+  set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+};
+
+/* Banderines */
+const ban = $('#banderines');
+for (let i = 0; i < 60; i++) ban.append(document.createElement('i'));
+
+/* ====== Plazo ====== */
+const cerrado = () => Date.now() >= CIERRE.getTime();
+function pintarRestante() {
+  const ms = CIERRE.getTime() - Date.now();
+  const r = $('#restante');
+  if (ms <= 0) { r.textContent = 'Plazo cerrado'; return; }
+  const d = Math.floor(ms / 864e5), h = Math.floor(ms % 864e5 / 36e5);
+  r.textContent = d > 0 ? `Quedan ${d} ${d === 1 ? 'día' : 'días'} y ${h} h` : `Quedan ${h} h ${Math.floor(ms % 36e5 / 6e4)} min`;
+}
+pintarRestante(); setInterval(pintarRestante, 60000);
+
+/* ====== Personas ====== */
+let seq = 0;
+const cont = $('#personas');
+
+function opcion(nombreGrupo, item, uid) {
+  const radio = el('input', {type:'radio', name:nombreGrupo, value:item.id});
+  const tags = item.tags ? el('span', {class:'tags'}, ...item.tags.map(t => el('span', {class: t === 'Vegano' ? 'veg' : '', text:t}))) : null;
+  const lab = el('div', {class:'op'}, el('label', {class:'op-main'}, radio, el('strong', {text:item.nombre}), el('span', {class:'desc', text:item.desc}), tags));
+  if (item.variantes) {
+    const grupo = `${nombreGrupo}-var`;
+    const v = el('span', {class:'variante', role:'radiogroup', 'aria-label': `${item.varLbl} de ${item.nombre}`});
+    item.variantes.forEach(x => v.append(el('label', {}, el('input', {type:'radio', name:grupo, value:x}), x)));
+    v.hidden = true;
+    lab.append(v);
+  }
+  return lab;
+}
+
+function sincronizarVariantes(fs) {
+  fs.querySelectorAll('.op').forEach(op => {
+    const v = op.querySelector('.variante');
+    if (!v) return;
+    const on = op.querySelector('.op-main input').checked;
+    v.hidden = !on;
+    if (!on) v.querySelectorAll('input').forEach(i => i.checked = false);
+  });
+}
+
+function agregarPersona(datos) {
+  if (cont.children.length >= MAX_PERSONAS) return;
+  const uid = 'p' + (++seq);
+  const node = $('#tpl-persona').content.firstElementChild.cloneNode(true);
+  node.dataset.uid = uid;
+  const nombre = node.querySelector('.p-nombre');
+  nombre.id = uid + '-nombre';
+  node.querySelector('.p-lbl-nombre').setAttribute('for', nombre.id);
+  const obs = node.querySelector('.p-obs');
+  obs.id = uid + '-obs';
+  node.querySelector('.p-lbl-obs').setAttribute('for', obs.id);
+
+  const fsP = node.querySelector('.p-platos'), fsB = node.querySelector('.p-bebidas');
+  PLATOS.forEach(p => fsP.querySelector('.opciones').append(opcion(uid + '-plato', p, uid)));
+  BEBIDAS.forEach(b => fsB.querySelector('.opciones').append(opcion(uid + '-bebida', b, uid)));
+  [fsP, fsB].forEach(fs => fs.addEventListener('change', e => {
+    if (!e.target.name.endsWith('-var')) sincronizarVariantes(fs);
+    fs.classList.remove('invalido-g');
+  }));
+  nombre.addEventListener('input', () => nombre.classList.remove('invalido'));
+  node.querySelector('.quitar').addEventListener('click', () => { node.remove(); renumerar(); });
+
+  if (datos) {
+    nombre.value = datos.nombre || '';
+    obs.value = datos.obs || '';
+    marcar(node, `${uid}-plato`, datos.plato); sincronizarVariantes(fsP); marcar(node, `${uid}-plato-var`, datos.platoVar);
+    marcar(node, `${uid}-bebida`, datos.bebida); sincronizarVariantes(fsB); marcar(node, `${uid}-bebida-var`, datos.bebidaVar);
+  }
+  cont.append(node);
+  renumerar();
+  return node;
+}
+function marcar(node, name, val) {
+  if (!val) return;
+  node.querySelectorAll(`input[name="${name}"]`).forEach(i => { if (i.value === val) i.checked = true; });
+}
+function renumerar() {
+  const items = [...cont.children];
+  items.forEach((n, i) => {
+    n.querySelector('.p-titulo').textContent = i === 0 ? 'Tu elección' : `Acompañante ${i}`;
+    n.querySelector('.p-lbl-nombre').textContent = i === 0 ? 'Tu nombre y apellido' : 'Nombre y apellido del acompañante';
+    n.querySelector('.quitar').hidden = items.length === 1;
+  });
+  $('#agregar').hidden = items.length >= MAX_PERSONAS;
+}
+$('#agregar').addEventListener('click', () => { const n = agregarPersona(); n && n.querySelector('.p-nombre').focus(); });
+
+/* ====== Validación y envío ====== */
+function leer() {
+  const errores = [];
+  const personas = [...cont.children].map((n, i) => {
+    const uid = n.dataset.uid;
+    const val = name => (n.querySelector(`input[name="${name}"]:checked`) || {}).value || '';
+    const p = {
+      nombre: n.querySelector('.p-nombre').value.replace(/\s+/g, ' ').trim(),
+      plato: val(uid + '-plato'), platoVar: val(uid + '-plato-var'),
+      bebida: val(uid + '-bebida'), bebidaVar: val(uid + '-bebida-var'),
+      obs: n.querySelector('.p-obs').value.trim()
+    };
+    const msgs = [];
+    const fsP = n.querySelector('.p-platos'), fsB = n.querySelector('.p-bebidas');
+    if (p.nombre.length < 3) { msgs.push('escribe el nombre'); n.querySelector('.p-nombre').classList.add('invalido'); }
+    const pl = PLATOS.find(x => x.id === p.plato), be = BEBIDAS.find(x => x.id === p.bebida);
+    if (!pl) { msgs.push('elige un plato fuerte'); fsP.classList.add('invalido-g'); }
+    else if (pl.variantes && !p.platoVar) { msgs.push(`elige ${pl.variantes.join(' o ').toLowerCase()} para el ${pl.nombre}`); fsP.classList.add('invalido-g'); }
+    if (!be) { msgs.push('elige una bebida'); fsB.classList.add('invalido-g'); }
+    else if (be.variantes && !p.bebidaVar) { msgs.push(`elige ${be.variantes.join(' o ').toLowerCase()} para la ${be.nombre}`); fsB.classList.add('invalido-g'); }
+    const e = n.querySelector('.p-err');
+    e.hidden = !msgs.length;
+    e.textContent = msgs.length ? 'Falta: ' + msgs.join(', ') + '.' : '';
+    if (msgs.length) errores.push(n);
+    return p;
+  });
+  const claves = personas.map(p => p.nombre.toLowerCase());
+  if (new Set(claves).size !== claves.length) errores.push(null);
+  return {personas, errores, repetidos: new Set(claves).size !== claves.length};
+}
+
+async function api(payload) {
+  if (!SCRIPT_URL) throw new Error('El formulario todavía no está conectado. Avísale a Cristian.');
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), 20000);
+  try {
+    const r = await fetch(SCRIPT_URL, {method:'POST', body: JSON.stringify(payload), redirect:'follow', signal: ctrl.signal});
+    if (!r.ok) throw new Error('No pudimos conectar con el servidor. Intenta de nuevo.');
+    return await r.json();
+  } catch (e) {
+    if (e.name === 'AbortError') throw new Error('La conexión tardó demasiado. Revisa tu internet e intenta de nuevo.');
+    if (e instanceof TypeError) throw new Error('No pudimos conectar con el servidor. Revisa tu internet e intenta de nuevo.');
+    throw e;
+  } finally { clearTimeout(t); }
+}
+
+const errG = $('#error-general');
+$('#form').addEventListener('submit', async e => {
+  e.preventDefault();
+  errG.hidden = true;
+  if (cerrado()) { mostrarCerrado(); return; }
+  const {personas, errores, repetidos} = leer();
+  if (repetidos) { errG.textContent = 'Hay dos personas con el mismo nombre. Revisa los nombres.'; errG.hidden = false; }
+  const primero = errores.find(Boolean);
+  if (errores.length) { (primero || errG).scrollIntoView({behavior:'smooth', block:'center'}); (primero?.querySelector('.invalido, .invalido-g input') || primero)?.focus?.({preventScroll:true}); return; }
+
+  const btn = $('#enviar');
+  btn.disabled = true; btn.textContent = 'Enviando…';
+  try {
+    const res = await api({accion:'enviar', personas, web: $('#web').value});
+    if (!res.ok) throw new Error(res.error || 'No se pudo guardar tu elección.');
+    store.set('menu-grado-envio', {personas, fecha: new Date().toISOString()});
+    mostrarEnviado(personas, res.actualizados > 0);
+  } catch (err) {
+    errG.textContent = err.message; errG.hidden = false;
+  } finally {
+    btn.disabled = false; btn.textContent = 'Enviar elección';
+  }
+});
+
+/* ====== Estados ====== */
+const aviso = $('#aviso');
+const nombrePlato = p => { const x = PLATOS.find(i => i.id === p.plato); return x ? x.nombre + (p.platoVar ? ` (${p.platoVar})` : '') : ''; };
+const nombreBebida = p => { const x = BEBIDAS.find(i => i.id === p.bebida); return x ? x.nombre + (p.bebidaVar ? ` (${p.bebidaVar})` : '') : ''; };
+
+function mostrarEnviado(personas, actualizado) {
+  aviso.className = 'aviso ok'; aviso.hidden = false; aviso.replaceChildren();
+  aviso.append(
+    el('h2', {text: actualizado ? '¡Elección actualizada!' : '¡Listo, tu elección quedó guardada!'}),
+    el('p', {text:'Nos vemos el viernes 20 de noviembre a las 7:00 p. m. en Osaki.'}),
+    el('ul', {}, ...personas.map(p => el('li', {}, el('b', {text: p.nombre + ': '}), `${nombrePlato(p)} · ${nombreBebida(p)}`)))
+  );
+  if (!cerrado()) {
+    const b = el('button', {type:'button', class:'btn claro', text:'Cambiar mi elección'});
+    b.addEventListener('click', () => { aviso.hidden = true; $('#form').hidden = false; cont.querySelector('.p-nombre')?.focus(); });
+    aviso.append(el('div', {class:'acciones'}, b));
+  }
+  $('#form').hidden = true;
+  aviso.scrollIntoView({behavior:'smooth', block:'start'});
+}
+function mostrarCerrado() {
+  aviso.className = 'aviso mal'; aviso.hidden = false; aviso.replaceChildren(
+    el('h2', {text:'El plazo para elegir ya cerró'}),
+    el('p', {text:'La elección de platos estuvo abierta hasta el 11 de noviembre. Si necesitas un cambio, escríbele directamente a Cristian.'})
+  );
+  $('#form').hidden = true;
+}
+
+/* Inicio */
+const previo = store.get('menu-grado-envio');
+if (previo && Array.isArray(previo.personas) && previo.personas.length) {
+  previo.personas.slice(0, MAX_PERSONAS).forEach(p => agregarPersona(p));
+  if (cerrado()) mostrarCerrado(); else mostrarEnviado(previo.personas, false);
+} else {
+  agregarPersona();
+  if (cerrado()) mostrarCerrado();
+}
+
+/* ====== Administración ====== */
+const dlg = $('#admin');
+const estado = $('#adm-estado');
+let claveSesion = '', filas = [];
+
+$('#ohm').addEventListener('click', () => { dlg.showModal(); (claveSesion ? $('#refrescar') : $('#clave')).focus(); });
+$('#adm-cerrar').addEventListener('click', () => dlg.close());
+dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+
+async function cargarAdmin(clave) {
+  estado.textContent = 'Cargando respuestas…';
+  try {
+    const res = await api({accion:'admin', clave});
+    if (!res.ok) { estado.textContent = res.error || 'No se pudo entrar.'; claveSesion = ''; $('#panel').hidden = true; $('#login').hidden = false; return; }
+    claveSesion = clave; filas = res.filas || [];
+    $('#login').hidden = true; $('#panel').hidden = false;
+    pintarAdmin();
+    estado.textContent = `Actualizado: ${new Date().toLocaleTimeString('es-CO', {hour:'2-digit', minute:'2-digit'})}`;
+  } catch (err) { estado.textContent = err.message; }
+}
+$('#login').addEventListener('submit', e => {
+  e.preventDefault();
+  const c = $('#clave').value.trim();
+  $('#clave').value = '';
+  if (c) cargarAdmin(c);
+});
+$('#refrescar').addEventListener('click', () => claveSesion && cargarAdmin(claveSesion));
+
+const etiquetaPlato = f => f.plato + (f.platoVar ? ` (${f.platoVar})` : '');
+const etiquetaBebida = f => f.bebida + (f.bebidaVar ? ` (${f.bebidaVar})` : '');
+function contar(fn) {
+  const m = new Map();
+  filas.forEach(f => m.set(fn(f), (m.get(fn(f)) || 0) + 1));
+  return [...m.entries()].sort((a, b) => b[1] - a[1]);
+}
+function lista(ul, pares) {
+  ul.replaceChildren(...(pares.length ? pares.map(([k, v]) => el('li', {}, el('span', {text:k}), el('b', {text:String(v)}))) : [el('li', {text:'Sin respuestas aún'})]));
+}
+function pintarAdmin() {
+  $('#r-total').textContent = filas.length;
+  lista($('#r-platos'), contar(etiquetaPlato));
+  lista($('#r-bebidas'), contar(etiquetaBebida));
+  const tb = $('#r-filas');
+  const ordenadas = [...filas].sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
+  tb.replaceChildren(...(ordenadas.length ? ordenadas.map(f => el('tr', {},
+    el('td', {text:f.nombre}), el('td', {text:etiquetaPlato(f)}), el('td', {text:etiquetaBebida(f)}),
+    el('td', {text:f.obs || '—'}), el('td', {text: f.por && f.por !== f.nombre ? f.por : '—'}),
+    el('td', {class:'fecha', text: f.fecha ? new Date(f.fecha).toLocaleString('es-CO', {day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit'}) : ''})
+  )) : [el('tr', {}, el('td', {colspan:'6', text:'Todavía no hay respuestas.'}))]));
+}
+
+function textoResumen() {
+  const l = [`Reserva grado Cristian Romero · Viernes 20 de noviembre · 7:00 p. m.`, `Total: ${filas.length} personas`, '', 'PLATOS FUERTES'];
+  contar(etiquetaPlato).forEach(([k, v]) => l.push(`- ${k}: ${v}`));
+  l.push('', 'BEBIDAS');
+  contar(etiquetaBebida).forEach(([k, v]) => l.push(`- ${k}: ${v}`));
+  const obs = filas.filter(f => f.obs);
+  if (obs.length) { l.push('', 'OBSERVACIONES'); obs.forEach(f => l.push(`- ${f.nombre}: ${f.obs}`)); }
+  return l.join('\n');
+}
+$('#copiar').addEventListener('click', async () => {
+  const t = textoResumen();
+  try { await navigator.clipboard.writeText(t); estado.textContent = 'Resumen copiado. Pégalo en WhatsApp o en el correo al restaurante.'; }
+  catch {
+    const ta = el('textarea'); ta.value = t; ta.style.cssText = 'position:fixed;opacity:0'; dlg.append(ta); ta.select();
+    try { document.execCommand('copy'); estado.textContent = 'Resumen copiado.'; } catch { estado.textContent = 'No se pudo copiar automáticamente.'; }
+    ta.remove();
+  }
+});
+$('#csv').addEventListener('click', () => {
+  const esc = v => { let s = String(v ?? ''); if (/^[=+\-@\t\r]/.test(s)) s = "'" + s; return '"' + s.replace(/"/g, '""') + '"'; };
+  const rows = [['Nombre','Plato fuerte','Variante plato','Bebida','Variante bebida','Observaciones','Registrado por','Fecha']]
+    .concat(filas.map(f => [f.nombre, f.plato, f.platoVar, f.bebida, f.bebidaVar, f.obs, f.por, f.fecha]));
+  const blob = new Blob(['﻿' + rows.map(r => r.map(esc).join(';')).join('\r\n')], {type:'text/csv;charset=utf-8'});
+  const a = el('a', {href: URL.createObjectURL(blob), download:'menu-grado-osaki.csv'});
+  document.body.append(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+});
+})();
+</script>
+</body>
+</html>
